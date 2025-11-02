@@ -266,3 +266,86 @@ h1, h2, h3 {
     color: var(--color-light-text);
     line-height: 1.5;
 }
+/* --- India Specific Layout Enhancements --- */
+
+/* Base container for the featured festivals section */
+.featured-cards-container {
+    padding: 20px 0 60px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Styling for the featured festival cards */
+.featured-card {
+    background: linear-gradient(145deg, #fffcf5, #f5f0e6);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid var(--color-primary);
+}
+.featured-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.featured-card h4 {
+    font-size: 1.5rem;
+    color: var(--color-primary-dark);
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.featured-card p {
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+
+/* --- Month Toggle Styles --- */
+
+.month-toggle {
+    cursor: pointer;
+    background-color: var(--color-secondary); /* Use cream background for button */
+    color: var(--color-text);
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.month-toggle:hover {
+    background-color: #e6e1d5;
+}
+
+.toggle-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.month-section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    padding: 0 10px;
+}
+
+/* Style when section is open (via JS class) */
+.month-section-content.open {
+    max-height: 2000px; /* Large enough value to cover all content */
+    padding: 20px 10px;
+}
+
+.month-toggle[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.festival-grid-month {
+    /* Ensure the grid doesn't have excess padding when closed */
+    padding-top: 0; 
+}
