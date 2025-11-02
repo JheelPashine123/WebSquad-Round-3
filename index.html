@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CultureConnect - Celebrate the World Together</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- Base & Typography --- */
+        :root {
+            --color-primary: #a87f32; /* Rich Amber/Gold */
+            --color-primary-dark: #8b6b27;
+            --color-secondary: #f7f3e9; /* Light Cream Background */
+            --color-surface: #ffffff;
+            --color-text: #333333;
+            --color-light-text: #666666;
+            --color-dark-bg: #2c2c2c;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --spacing-large: 100px;
+            --spacing-medium: 60px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--color-surface);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            color: var(--color-text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Utility Classes --- */
+        .text-center { text-align: center; }
+        .shadow-lg { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
+        .rounded-xl { border-radius: 12px; }
+        .flex-center { display: flex; justify-content: center; align-items: center; }
+        .grid-cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .grid-cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+
+        @media (max-width: 1024px) {
+            .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .grid-cols-4, .grid-cols-3 { grid-template-columns: 1fr; }
+            .hero-content { padding: 40px 0; }
+        }
+
+        /* --- Hero Section --- */
+        .hero-bg {
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #e8ddd4 50%, #d4c4a8 100%);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: var(--spacing-medium) 0;
+        }
+
+        .hero-bg h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-bg p {
+            font-size: 1.5rem;
+            color: var(--color-light-text);
+            margin-bottom: 40px;
+        }
+
+        /* Floating Icons Animation */
+        .floating-icon {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+            font-size: 3rem;
+        }
+
+        .floating-icon:nth-child(2) { animation-delay: -2s; }
+        .floating-icon:nth-child(3) { animation-delay: -4s; }
+        .floating-icon:nth-child(5) { animation-delay: -1s; }
+        .floating-icon:nth-child(6) { animation-delay: -3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        /* --- Map Section --- */
+        .map-section {
+            padding: var(--spacing-large) 0;
+        }
+
+        .map-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-medium);
+        }
+
+        .map-container {
+            max-width: 900px; /* Set max width to manage coordinate scaling */
+            margin: 0 auto;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* --- Highlights Section --- */
+        .highlights-section {
+            padding: var(--spacing-large) 0;
+            background-color: #fcfbf8;
+        }
+
+        .highlights-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-medium);
+        }
+
+        .festival-card {
+            background-color: var(--color-surface);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .festival-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image {
+            height: 180px;
+            font-size: 3rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-1 { background: linear-gradient(135deg, #FF6F61, #DE425A); } 
+        .card-2 { background: linear-gradient(135deg, #FFC300, #FF5733); }
+        .card-3 { background: linear-gradient(135deg, #3C1053, #2C73D2); }
+        .card-4 { background: linear-gradient(135deg, #16A085, #2ECC71); }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .card-content .country {
+            color: var(--color-light-text);
+            margin-bottom: 10px;
+        }
+
+        .card-content .month {
+            color: var(--color-primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* --- Why Culture Matters Section --- */
+        .culture-section {
+            padding: var(--spacing-large) 0;
+            background: linear-gradient(to top, var(--color-secondary), var(--color-surface));
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--color-dark-bg);
+            color: #dddddd;
+            padding: 40px 0;
+            font-size: 0.95rem;
+        }
+
+        .footer a {
+            color: #dddddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--color-primary);
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            margin: 0 15px;
+        }
+        
+        /* Image Map Tooltip */
+        #map-tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            transform: translate(-50%, -100%);
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero-bg">
+        <div class="floating-icon" style="top: 15%; left: 10%;">🏮</div>
+        <div class="floating-icon" style="top: 25%; right: 15%;">🎭</div>
+        <div class="floating-icon" style="bottom: 20%; left: 12%;">🪔</div>
+        <div class="floating-icon" style="bottom: 15%; right: 10%;">🎪</div>
+        <div class="floating-icon" style="top: 50%; left: 5%;">🌸</div>
+        <div class="floating-icon" style="top: 30%; right: 5%;">🎨</div>
+
+        <div class="text-center hero-content" style="z-index: 10;">
+            <h1 id="main-headline">Connect & Celebrate Our Global Heritage</h1>
+            <p id="subheadline">Discover **traditions**, **festivals**, and **stories** from every corner of the planet.</p>
+            <div class="button-group">
+                <a href="#map-section" id="explore-button" class="btn btn-primary">🗺️ Explore by Continent</a>
+                <a href="#timeline-section" id="timeline-button" class="btn btn-secondary">📅 View Timeline</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="map-section" class="map-section">
+        <div class="container text-center">
+            <h2 id="map-section-title">Explore Festivals Worldwide</h2>
+            
+            <div class="map-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUb_BUZ6PgiUoXbVPyXFkvMdbhx3Wf-OKuZg&s" 
+                     alt="Stylized World Map" 
+                     usemap="#worldmap" 
+                     id="world-map-image">
+                
+                <map name="worldmap" id="worldmap">
+                    <area shape="rect" coords="50,150,260,300" alt="North America" data-continent="North America" data-festivals="42" href="javascript:void(0);" />
+                    <area shape="rect" coords="170,300,300,450" alt="South America" data-continent="South America" data-festivals="38" href="javascript:void(0);" />
+                    <area shape="rect" coords="320,150,480,250" alt="Europe" data-continent="Europe" data-festivals="56" href="javascript:void(0);" />
+                    <area shape="rect" coords="320,250,500,450" alt="Africa" data-continent="Africa" data-festivals="71" href="javascript:void(0);" />
+                    <area shape="rect" coords="480,100,780,380" alt="Asia" data-continent="Asia" data-festivals="124" href="javascript:void(0);" />
+                    <area shape="rect" coords="680,400,850,500" alt="Australia" data-continent="Australia" data-festivals="23" href="javascript:void(0);" />
+                </map>
+                
+                <div id="map-tooltip"></div>
+            </div>
+            <p style="margin-top: 20px; font-style: italic; color: var(--color-light-text);">Hover over the map for festival counts!</p>
+        </div>
+    </section>
+
+    <section class="highlights-section">
+        <div class="container text-center">
+            <h2 id="highlights-section-title">Featured Celebrations</h2>
+            <div class="grid-cols-4">
+                <div class="festival-card">
+                    <div class="card-image card-1"><span>🎨</span></div>
+                    <div class="card-content">
+                        <h3>**Holi Festival**</h3>
+                        <p class="country">India</p>
+                        <p class="month">March</p>
+                    </div>
+                </div>
+                <div class="festival-card">
+                    <div class="card-image card-2"><span>🎭</span></div>
+                    <div class="card-content">
+                        <h3>**Rio Carnival**</h3>
+                        <p class="country">Brazil</p>
+                        <p class="month">February</p>
+                    </div>
+                </div>
+                <div class="festival-card">
+                    <div class="card-image card-3"><span>🍻</span></div>
+                    <div class="card-content">
+                        <h3>**Oktoberfest**</h3>
+                        <p class="country">Germany</p>
+                        <p class="month">September</p>
+                    </div>
+                </div>
+                <div class="festival-card">
+                    <div class="card-image card-4"><span>🏮</span></div>
+                    <div class="card-content">
+                        <h3>**Chinese New Year**</h3>
+                        <p class="country">China</p>
+                        <p class="month">January/February</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="culture-section">
+        <div class="container text-center">
+            <h2 id="culture-section-title">Why Culture Matters</h2>
+            <div class="grid-cols-3">
+                <div class="culture-point">
+                    <div class="icon">🌏</div>
+                    <h3>Connect with the World</h3>
+                    <p>Bridge distances and discover the beautiful diversity that makes our planet extraordinary.</p>
+                </div>
+                <div class="culture-point">
+                    <div class="icon">🕊️</div>
+                    <h3>Celebrate Diversity</h3>
+                    <p>Embrace different traditions and find the common threads that unite us all as humans.</p>
+                </div>
+                <div class="culture-point">
+                    <div class="icon">🌺</div>
+                    <h3>Learn with Empathy</h3>
+                    <p>Develop deeper understanding and appreciation for the rich tapestry of global cultures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p id="footer-text">Made with ❤️ by CultureConnect Team</p>
+            <div class="social-links">
+                <a href="#" target="_blank" rel="noopener noreferrer">📘</a> 
+                <a href="#" target="_blank" rel="noopener noreferrer">🐦</a> 
+                <a href="#" target="_blank" rel="noopener noreferrer">📷</a>
+            </div>
+            <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Image Map Tooltip Functionality ---
+        const mapAreas = document.querySelectorAll('#worldmap area');
+        const mapTooltip = document.getElementById('map-tooltip');
+        const mapImage = document.getElementById('world-map-image');
+        
+        // This is the assumed natural width used to calculate the coordinates above.
+        // It's crucial for scaling the tooltip position correctly.
+        const MAP_NATURAL_WIDTH = 900; 
+
+        mapAreas.forEach(area => {
+            area.addEventListener('mouseover', (e) => {
+                const continentName = e.target.getAttribute('data-continent');
+                const festivalCount = e.target.getAttribute('data-festivals');
+                
+                mapTooltip.textContent = `${continentName}: ${festivalCount} Festivals`;
+                mapTooltip.style.opacity = '1';
+                
+                const coords = e.target.coords.split(',').map(c => parseInt(c.trim()));
+                let x = coords[0], y = coords[1];
+
+                // Calculate the center point of the rectangular area
+                if (coords.length === 4) {
+                    x = (coords[0] + coords[2]) / 2;
+                    y = (coords[1] + coords[3]) / 2;
+                }
+                
+                // Scale the coordinates based on the current image size
+                const scale = mapImage.offsetWidth / MAP_NATURAL_WIDTH;
+
+                const tooltipX = (x * scale);
+                const tooltipY = (y * scale);
+                
+                mapTooltip.style.left = tooltipX + 'px';
+                mapTooltip.style.top = tooltipY + 'px';
+            });
+
+            area.addEventListener('mouseout', () => {
+                mapTooltip.style.opacity = '0';
+            });
+
+            area.addEventListener('click', (e) => {
+                e.preventDefault();
+                const continentName = e.target.getAttribute('data-continent');
+                console.log(`Navigating to ${continentName} festivals...`);
+                alert(`You clicked on ${continentName}!`);
+            });
+        });
+    </script>
+</body>
+</html>
