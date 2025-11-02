@@ -45,8 +45,6 @@
         /* --- Utility Classes --- */
         .text-center { text-align: center; }
         .shadow-lg { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
-        .rounded-xl { border-radius: 12px; }
-        .flex-center { display: flex; justify-content: center; align-items: center; }
         .grid-cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
         .grid-cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 
@@ -56,10 +54,9 @@
 
         @media (max-width: 640px) {
             .grid-cols-4, .grid-cols-3 { grid-template-columns: 1fr; }
-            .hero-content { padding: 40px 0; }
         }
 
-        /* --- Hero Section --- */
+        /* --- Hero Section & Animations --- */
         .hero-bg {
             background: linear-gradient(135deg, var(--color-secondary) 0%, #e8ddd4 50%, #d4c4a8 100%);
             min-height: 80vh;
@@ -71,25 +68,15 @@
             padding: var(--spacing-medium) 0;
         }
 
-        .hero-bg h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
+        .hero-bg h1 { font-size: 4rem; margin-bottom: 20px; }
+        .hero-bg p { font-size: 1.5rem; color: var(--color-light-text); margin-bottom: 40px; }
 
-        .hero-bg p {
-            font-size: 1.5rem;
-            color: var(--color-light-text);
-            margin-bottom: 40px;
-        }
-
-        /* Floating Icons Animation */
         .floating-icon {
             position: absolute;
             animation: float 6s ease-in-out infinite;
             opacity: 0.7;
             font-size: 3rem;
         }
-
         .floating-icon:nth-child(2) { animation-delay: -2s; }
         .floating-icon:nth-child(3) { animation-delay: -4s; }
         .floating-icon:nth-child(5) { animation-delay: -1s; }
@@ -102,151 +89,34 @@
 
         /* --- Buttons --- */
         .btn {
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin: 0 10px;
-            border: 2px solid transparent;
+            padding: 15px 35px; border-radius: 50px; font-size: 1.1rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease; text-decoration: none;
+            display: inline-block; margin: 0 10px; border: 2px solid transparent;
         }
+        .btn-primary { background-color: var(--color-primary); color: white; border-color: var(--color-primary); }
+        .btn-primary:hover { background-color: var(--color-primary-dark); box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); }
+        .btn-secondary { background-color: transparent; color: var(--color-primary); border-color: var(--color-primary); }
+        .btn-secondary:hover { background-color: var(--color-primary); color: white; }
 
-        .btn-primary {
-            background-color: var(--color-primary);
-            color: white;
-            border-color: var(--color-primary);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--color-primary-dark);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--color-primary);
-            border-color: var(--color-primary);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--color-primary);
-            color: white;
-        }
-
-        /* --- Map Section --- */
-        .map-section {
-            padding: var(--spacing-large) 0;
-        }
-
-        .map-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: var(--spacing-medium);
-        }
+        /* --- Map Section (Image Map) --- */
+        .map-section { padding: var(--spacing-large) 0; }
+        .map-section h2 { font-size: 2.5rem; margin-bottom: var(--spacing-medium); }
 
         .map-container {
-            max-width: 900px; /* Set max width to manage coordinate scaling */
+            max-width: 900px; /* This limits the visible size of the map image */
             margin: 0 auto;
-            position: relative;
+            position: relative; 
             border-radius: 15px;
             overflow: hidden;
         }
-
+        
         .map-container img {
             width: 100%;
             height: auto;
             display: block;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
-        
-        /* --- Highlights Section --- */
-        .highlights-section {
-            padding: var(--spacing-large) 0;
-            background-color: #fcfbf8;
-        }
 
-        .highlights-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: var(--spacing-medium);
-        }
-
-        .festival-card {
-            background-color: var(--color-surface);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .festival-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-image {
-            height: 180px;
-            font-size: 3rem;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .card-1 { background: linear-gradient(135deg, #FF6F61, #DE425A); } 
-        .card-2 { background: linear-gradient(135deg, #FFC300, #FF5733); }
-        .card-3 { background: linear-gradient(135deg, #3C1053, #2C73D2); }
-        .card-4 { background: linear-gradient(135deg, #16A085, #2ECC71); }
-
-        .card-content {
-            padding: 25px;
-        }
-
-        .card-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-        }
-
-        .card-content .country {
-            color: var(--color-light-text);
-            margin-bottom: 10px;
-        }
-
-        .card-content .month {
-            color: var(--color-primary);
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        /* --- Why Culture Matters Section --- */
-        .culture-section {
-            padding: var(--spacing-large) 0;
-            background: linear-gradient(to top, var(--color-secondary), var(--color-surface));
-        }
-
-        /* --- Footer --- */
-        .footer {
-            background-color: var(--color-dark-bg);
-            color: #dddddd;
-            padding: 40px 0;
-            font-size: 0.95rem;
-        }
-
-        .footer a {
-            color: #dddddd;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--color-primary);
-        }
-
-        .social-links a {
-            font-size: 1.5rem;
-            margin: 0 15px;
-        }
-        
         /* Image Map Tooltip */
         #map-tooltip {
             position: absolute;
@@ -259,8 +129,30 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: 10;
-            transform: translate(-50%, -100%);
+            transform: translate(-50%, -100%); /* Centers and lifts above cursor */
         }
+        
+        /* --- Highlights & Culture Sections --- */
+        .highlights-section { padding: var(--spacing-large) 0; background-color: #fcfbf8; }
+        .festival-card { 
+            background-color: var(--color-surface); border-radius: 12px; overflow: hidden; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        .festival-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); }
+        .card-image { height: 180px; font-size: 3rem; color: white; display: flex; align-items: center; justify-content: center; }
+        .card-1 { background: linear-gradient(135deg, #FF6F61, #DE425A); } 
+        .card-2 { background: linear-gradient(135deg, #FFC300, #FF5733); }
+        .card-3 { background: linear-gradient(135deg, #3C1053, #2C73D2); }
+        .card-4 { background: linear-gradient(135deg, #16A085, #2ECC71); }
+        .card-content { padding: 25px; }
+
+        .culture-section { padding: var(--spacing-large) 0; background: linear-gradient(to top, var(--color-secondary), var(--color-surface)); }
+        .culture-point .icon { font-size: 4rem; margin-bottom: 20px; }
+
+        /* --- Footer --- */
+        .footer { background-color: var(--color-dark-bg); color: #dddddd; padding: 40px 0; font-size: 0.95rem; }
+        .social-links a { font-size: 1.5rem; margin: 0 15px; color: #dddddd; transition: color 0.3s ease; }
+        .social-links a:hover { color: var(--color-primary); }
     </style>
 </head>
 <body>
@@ -288,18 +180,26 @@
             <h2 id="map-section-title">Explore Festivals Worldwide</h2>
             
             <div class="map-container">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUb_BUZ6PgiUoXbVPyXFkvMdbhx3Wf-OKuZg&s" 
-                     alt="Stylized World Map" 
+                
+                <img src="https://www.giftofcuriosity.com/wp-content/uploads/2015/03/Montessori-world-map-and-continents_Page_04.png" 
+                     alt="Montessori World Map" 
                      usemap="#worldmap" 
                      id="world-map-image">
                 
                 <map name="worldmap" id="worldmap">
-                    <area shape="rect" coords="50,150,260,300" alt="North America" data-continent="North America" data-festivals="42" href="javascript:void(0);" />
-                    <area shape="rect" coords="170,300,300,450" alt="South America" data-continent="South America" data-festivals="38" href="javascript:void(0);" />
-                    <area shape="rect" coords="320,150,480,250" alt="Europe" data-continent="Europe" data-festivals="56" href="javascript:void(0);" />
-                    <area shape="rect" coords="320,250,500,450" alt="Africa" data-continent="Africa" data-festivals="71" href="javascript:void(0);" />
-                    <area shape="rect" coords="480,100,780,380" alt="Asia" data-continent="Asia" data-festivals="124" href="javascript:void(0);" />
-                    <area shape="rect" coords="680,400,850,500" alt="Australia" data-continent="Australia" data-festivals="23" href="javascript:void(0);" />
+                    <area shape="poly" coords="20,285,100,200,180,195,280,270,270,450,150,470,20,400" alt="North America" data-continent="North America" data-festivals="42" href="javascript:void(0);" />
+                    
+                    <area shape="poly" coords="170,470,260,450,300,500,280,670,200,680,150,550" alt="South America" data-continent="South America" data-festivals="38" href="javascript:void(0);" />
+                    
+                    <area shape="poly" coords="390,200,500,160,570,200,580,280,450,300,380,250" alt="Europe" data-continent="Europe" data-festivals="56" href="javascript:void(0);" />
+                    
+                    <area shape="poly" coords="380,310,480,300,570,350,580,550,520,680,450,650,370,500" alt="Africa" data-continent="Africa" data-festivals="71" href="javascript:void(0);" />
+                    
+                    <area shape="poly" coords="560,150,850,150,900,200,920,400,800,500,600,450,550,300" alt="Asia" data-continent="Asia" data-festivals="124" href="javascript:void(0);" />
+                    
+                    <area shape="poly" coords="700,520,850,500,900,580,850,680,750,650,680,580" alt="Australia" data-continent="Australia" data-festivals="23" href="javascript:void(0);" />
+
+                    <area shape="poly" coords="200,750,800,750,800,770,200,770" alt="Antarctica" data-continent="Antarctica" data-festivals="0" href="javascript:void(0);" />
                 </map>
                 
                 <div id="map-tooltip"></div>
@@ -389,30 +289,41 @@
         const mapTooltip = document.getElementById('map-tooltip');
         const mapImage = document.getElementById('world-map-image');
         
-        // This is the assumed natural width used to calculate the coordinates above.
-        // It's crucial for scaling the tooltip position correctly.
-        const MAP_NATURAL_WIDTH = 900; 
+        // This is the natural width of the provided image (1000px wide)
+        const MAP_NATURAL_WIDTH = 1000; 
 
         mapAreas.forEach(area => {
             area.addEventListener('mouseover', (e) => {
-                const continentName = e.target.getAttribute('data-continent');
-                const festivalCount = e.target.getAttribute('data-festivals');
+                const continentName = area.getAttribute('data-continent');
+                const festivalCount = area.getAttribute('data-festivals');
                 
                 mapTooltip.textContent = `${continentName}: ${festivalCount} Festivals`;
                 mapTooltip.style.opacity = '1';
                 
-                const coords = e.target.coords.split(',').map(c => parseInt(c.trim()));
-                let x = coords[0], y = coords[1];
+                // Get image map coordinates
+                const coords = area.coords.split(',').map(c => parseInt(c.trim()));
+                let x, y;
 
-                // Calculate the center point of the rectangular area
-                if (coords.length === 4) {
+                // Calculate the center point for tooltip placement based on shape
+                if (area.shape === 'rect') {
                     x = (coords[0] + coords[2]) / 2;
                     y = (coords[1] + coords[3]) / 2;
+                } else if (area.shape === 'poly') {
+                    // For polygons, find the approximate center by averaging coordinates
+                    let sumX = 0, sumY = 0;
+                    for (let i = 0; i < coords.length; i += 2) {
+                        sumX += coords[i];
+                        sumY += coords[i + 1];
+                    }
+                    x = sumX / (coords.length / 2);
+                    y = sumY / (coords.length / 2);
+                } else if (area.shape === 'circle') {
+                    x = coords[0];
+                    y = coords[1];
                 }
                 
-                // Scale the coordinates based on the current image size
+                // Scale the coordinates based on the current image size versus its natural size
                 const scale = mapImage.offsetWidth / MAP_NATURAL_WIDTH;
-
                 const tooltipX = (x * scale);
                 const tooltipY = (y * scale);
                 
@@ -425,11 +336,21 @@
             });
 
             area.addEventListener('click', (e) => {
-                e.preventDefault();
-                const continentName = e.target.getAttribute('data-continent');
+                e.preventDefault(); // Prevent default link behavior
+                const continentName = area.getAttribute('data-continent');
                 console.log(`Navigating to ${continentName} festivals...`);
                 alert(`You clicked on ${continentName}!`);
             });
+        });
+
+        // --- General Button Functionality ---
+        document.getElementById('explore-button').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('map-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('timeline-button').addEventListener('click', () => {
+            console.log('Viewing timeline...');
         });
     </script>
 </body>
