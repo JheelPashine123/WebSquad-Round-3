@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asia Festivals - CultureConnect</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* Asia Page Specific Styles */
+        .asia-hero {
+            background: linear-gradient(135deg, #a87f32 0%, #d4c4a8 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        .asia-hero h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .asia-map-container {
+            max-width: 800px;
+            margin: 40px auto;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .asia-map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .festival-list {
+            padding: 40px 0;
+            text-align: center;
+        }
+        .festival-list ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .festival-list li {
+            background-color: var(--color-secondary);
+            padding: 15px 25px;
+            border-radius: 8px;
+            width: 250px;
+            font-family: var(--font-serif);
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <section class="asia-hero">
+        <h1>Festivals of Asia</h1>
+        <p style="color: rgba(255, 255, 255, 0.8);">Discover the rich tapestry of celebrations across the world's largest continent.</p>
+        <a href="index.html" class="btn btn-secondary" style="margin-top: 20px; color: white; border-color: white;">← Back to World Map</a>
+    </section>
+
+    <div class="container">
+        <section class="asia-map-section">
+            <h2 class="text-center" style="margin-top: 60px;">Geographical View</h2>
+            <div class="asia-map-container">
+                <img src="https://img.freepik.com/premium-vector/asia-map-vector_850451-86.jpg" alt="Map of Asia">
+            </div>
+        </section>
+
+        <section class="festival-list">
+            <h2 style="margin-bottom: 30px;">Featured Asian Festivals</h2>
+            <ul>
+                <li>🏮 Chinese New Year (China)</li>
+                <li>🎨 Holi (India)</li>
+                <li>🐘 Songkran (Thailand)</li>
+                <li>🌸 Cherry Blossom Festival (Japan)</li>
+                <li>🪔 Diwali (India/Nepal)</li>
+                <li>🐲 Tet Holiday (Vietnam)</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p id="footer-text">Made with ❤️ by CultureConnect Team</p>
+            <div class="social-links">
+                <a href="#" target="_blank" rel="noopener noreferrer">📘</a> 
+                <a href="#" target="_blank" rel="noopener noreferrer">🐦</a> 
+                <a href="#" target="_blank" rel="noopener noreferrer">📷</a>
+            </div>
+            <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
