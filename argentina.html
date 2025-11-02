@@ -15,38 +15,69 @@
     </section>
 
     <div class="container">
-        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">A Calendar of Celebration</h2>
+        
+        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">🌟 Featured National Celebrations</h2>
 
-        <section class="month-section">
-            <h3 class="month-title">March</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Fiesta de la Vendimia (Mendoza)</h4>
-                    <p>Wine harvest festival with parades, tastings, and vineyard shows.</p>
+        <div class="featured-cards-container">
+            <div class="featured-card">
+                <h4>🍷 Fiesta de la Vendimia</h4>
+                <p>Wine harvest festival with parades and vineyard shows in Mendoza.</p>
+            </div>
+            <div class="featured-card">
+                <h4>💃 Tango Festival</h4>
+                <p>The world’s biggest tango competition and dance concerts in Buenos Aires.</p>
+            </div>
+            <div class="featured-card">
+                <h4>🎆 Independence Day</h4>
+                <p>National parades, folk dance, and food celebrating freedom from Spain.</p>
+            </div>
+        </div>
+
+        <h2 class="text-center" style="margin-top: 40px; margin-bottom: 40px; font-size: 3rem;">🗓️ Monthly Festival Calendar</h2>
+
+        <section class="month-section" id="month-march">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-march">
+                March <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-march">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Fiesta de la Vendimia (Mendoza)</h4>
+                        <p>Wine harvest festival with parades, tastings, and vineyard shows.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">July</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Independence Day</h4>
-                    <p>National parades, folk dance, and food celebrating freedom from Spain.</p>
+        <section class="month-section" id="month-july">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-july">
+                July <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-july">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Independence Day</h4>
+                        <p>National parades, folk dance, and food celebrating freedom from Spain.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">August</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Tango Festival (Buenos Aires)</h4>
-                    <p>World’s biggest tango competition + dance concerts.</p>
+        <section class="month-section" id="month-august">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-august">
+                August <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-august">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Tango Festival (Buenos Aires)</h4>
+                        <p>World’s biggest tango competition + dance concerts.</p>
+                    </div>
                 </div>
             </div>
         </section>
-    </div>
+        
+        </div>
 
     <footer class="footer">
         <div class="container text-center">
@@ -59,5 +90,47 @@
             <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.month-toggle');
+            
+            toggles.forEach(toggle => {
+                // Ensure IDs and attributes are set correctly for the script
+                const section = toggle.closest('.month-section');
+                const monthName = section.querySelector('.month-title').textContent.toLowerCase().replace(/\s/g, '');
+
+                const contentId = 'content-' + monthName;
+                const content = section.querySelector('.festival-grid-month').parentNode; // Assuming content wrapper is parent of grid
+
+                content.id = contentId;
+                toggle.setAttribute('aria-controls', contentId);
+                
+                // Initialize content state (ensure it's hidden on load)
+                toggle.setAttribute('aria-expanded', 'false');
+                content.classList.remove('open');
+                
+                toggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                    // Close all other open sections
+                    toggles.forEach(otherToggle => {
+                        if (otherToggle !== this) {
+                            otherToggle.setAttribute('aria-expanded', 'false');
+                            document.getElementById(otherToggle.getAttribute('aria-controls')).classList.remove('open');
+                        }
+                    });
+
+                    // Toggle current section
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    if (!isExpanded) {
+                        content.classList.add('open');
+                    } else {
+                        content.classList.remove('open');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

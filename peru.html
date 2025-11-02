@@ -15,28 +15,51 @@
     </section>
 
     <div class="container">
-        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">A Calendar of Celebration</h2>
+        
+        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">🌟 Featured National Celebrations</h2>
 
-        <section class="month-section">
-            <h3 class="month-title">June</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Inti Raymi (Cusco) (June 24)</h4>
-                    <p>Inca Sun Festival reenacting ancient royal ceremonies.</p>
+        <div class="featured-cards-container">
+            <div class="featured-card">
+                <h4>☀️ Inti Raymi (Cusco)</h4>
+                <p>Inca Sun Festival reenacting ancient royal ceremonies.</p>
+            </div>
+            <div class="featured-card">
+                <h4>✝️ Señor de los Milagros</h4>
+                <p>Massive purple-clad religious procession through Lima, known as the "Lord of Miracles."</p>
+            </div>
+        </div>
+
+        <h2 class="text-center" style="margin-top: 40px; margin-bottom: 40px; font-size: 3rem;">🗓️ Monthly Festival Calendar</h2>
+
+        <section class="month-section" id="month-june">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-june">
+                June <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-june">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Inti Raymi (Cusco) (June 24)</h4>
+                        <p>Inca Sun Festival reenacting ancient royal ceremonies.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">October</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Señor de los Milagros (Lord of Miracles)</h4>
-                    <p>Massive purple-clad religious procession through Lima.</p>
+        <section class="month-section" id="month-october">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-october">
+                October <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-october">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Señor de los Milagros (Lord of Miracles)</h4>
+                        <p>Massive purple-clad religious procession through Lima.</p>
+                    </div>
                 </div>
             </div>
         </section>
-    </div>
+        
+        </div>
 
     <footer class="footer">
         <div class="container text-center">
@@ -49,5 +72,40 @@
             <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.month-toggle');
+            
+            toggles.forEach(toggle => {
+                const contentId = toggle.getAttribute('aria-controls');
+                const content = document.getElementById(contentId);
+                
+                // Initialize content state (ensure it's hidden on load)
+                toggle.setAttribute('aria-expanded', 'false');
+                content.classList.remove('open');
+                
+                toggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                    // Close all other open sections
+                    toggles.forEach(otherToggle => {
+                        if (otherToggle !== this) {
+                            otherToggle.setAttribute('aria-expanded', 'false');
+                            document.getElementById(otherToggle.getAttribute('aria-controls')).classList.remove('open');
+                        }
+                    });
+
+                    // Toggle current section
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    if (!isExpanded) {
+                        content.classList.add('open');
+                    } else {
+                        content.classList.remove('open');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

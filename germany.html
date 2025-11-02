@@ -15,52 +15,91 @@
     </section>
 
     <div class="container">
-        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">A Calendar of Celebration</h2>
+        
+        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">🌟 Featured National Celebrations</h2>
 
-        <section class="month-section">
-            <h3 class="month-title">February</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    [cite_start]<h4>Cologne Carnival [cite: 14]</h4>
-                    [cite_start]<p>Huge costume parades and street parties before Lent. [cite: 14]</p>
+        <div class="featured-cards-container">
+            <div class="featured-card">
+                <h4>🍻 Oktoberfest (Munich)</h4>
+                <p>World’s largest beer festival, a massive folk festival with rides, music, and Bavarian culture.</p>
+            </div>
+            <div class="featured-card">
+                <h4>🎭 Cologne Carnival</h4>
+                <p>Huge costume parades and street parties celebrated extensively before the start of Lent.</p>
+            </div>
+            <div class="featured-card">
+                <h4>🎄 Christmas Markets</h4>
+                <p>Iconic winter markets found in every major German city, famous for mulled wine (Glühwein) and crafts.</p>
+            </div>
+            <div class="featured-card">
+                <h4>🧙‍♀️ Walpurgis Night</h4>
+                <p>An ancient, witch-themed bonfire festival welcoming spring, especially popular in the Harz region.</p>
+            </div>
+        </div>
+
+        <h2 class="text-center" style="margin-top: 40px; margin-bottom: 40px; font-size: 3rem;">🗓️ Monthly Festival Calendar</h2>
+
+        <section class="month-section" id="month-february">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-february">
+                February <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-february">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Cologne Carnival</h4>
+                        <p>Huge costume parades and street parties before Lent.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">May</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    [cite_start]<h4>Walpurgis Night (Harz region) [cite: 14]</h4>
-                    [cite_start]<p>Witch-themed bonfire festival welcoming spring. [cite: 14]</p>
+        <section class="month-section" id="month-may">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-may">
+                May <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-may">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Walpurgis Night (Harz region)</h4>
+                        <p>Witch-themed bonfire festival welcoming spring.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">September–October</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    [cite_start]<h4>Oktoberfest (Munich) [cite: 14]</h4>
-                    [cite_start]<p>World’s largest beer festival with rides, music, and Bavarian food. [cite: 14]</p>
+        <section class="month-section" id="month-sep-oct">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-sep-oct">
+                September–October <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-sep-oct">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Oktoberfest (Munich)</h4>
+                        <p>World’s largest beer festival with rides, music, and Bavarian food.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">December</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    [cite_start]<h4>Christmas Markets [cite: 14]</h4>
-                    [cite_start]<p>Iconic markets with mulled wine, crafts, and lights in every city. [cite: 14]</p>
-                </div>
-                <div class="festival-card-month">
-                    [cite_start]<h4>Krampusnacht (December 5) [cite: 14]</h4>
-                    [cite_start]<p>Spooky folklore night where horned Krampus roams streets. [cite: 14]</p>
+        <section class="month-section" id="month-december">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-december">
+                December <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-december">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Christmas Markets</h4>
+                        <p>Iconic markets with mulled wine, crafts, and lights in every city.</p>
+                    </div>
+                    <div class="festival-card-month">
+                        <h4>Krampusnacht (December 5)</h4>
+                        <p>Spooky folklore night where horned Krampus roams streets.</p>
+                    </div>
                 </div>
             </div>
         </section>
-    </div>
+        
+        </div>
 
     <footer class="footer">
         <div class="container text-center">
@@ -70,8 +109,43 @@
                 <a href="#" target="_blank" rel="noopener noreferrer">🐦</a> 
                 <a href="#" target="_blank" rel="noopener noreferrer">📷</a>
             </div>
-            <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
+            <p class="copyright">©️ 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.month-toggle');
+            
+            toggles.forEach(toggle => {
+                const contentId = toggle.getAttribute('aria-controls');
+                const content = document.getElementById(contentId);
+                
+                // Initialize content state (ensure it's hidden on load)
+                toggle.setAttribute('aria-expanded', 'false');
+                content.classList.remove('open');
+                
+                toggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                    // Close all other open sections
+                    toggles.forEach(otherToggle => {
+                        if (otherToggle !== this) {
+                            otherToggle.setAttribute('aria-expanded', 'false');
+                            document.getElementById(otherToggle.getAttribute('aria-controls')).classList.remove('open');
+                        }
+                    });
+
+                    // Toggle current section
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    if (!isExpanded) {
+                        content.classList.add('open');
+                    } else {
+                        content.classList.remove('open');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

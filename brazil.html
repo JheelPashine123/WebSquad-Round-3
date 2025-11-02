@@ -15,44 +15,82 @@
     </section>
 
     <div class="container">
-        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">A Calendar of Celebration</h2>
+        
+        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">🌟 Featured National Celebrations</h2>
 
-        <section class="month-section">
-            <h3 class="month-title">February</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Rio Carnival</h4>
-                    <p>World’s largest carnival with samba parades and massive street parties.</p>
+        <div class="featured-cards-container">
+            <div class="featured-card">
+                <h4>💃 Rio Carnival</h4>
+                <p>World’s largest carnival with samba parades and massive street parties.</p>
+            </div>
+            <div class="featured-card">
+                <h4>🐂 Parintins Folklore Festival</h4>
+                <p>Amazonian cultural battle between the red and blue folk teams.</p>
+            </div>
+            <div class="featured-card">
+                <h4>🍻 Oktoberfest Blumenau</h4>
+                <p>German-style beer festival in a Brazilian town built by German settlers.</p>
+            </div>
+            <div class="featured-card">
+                <h4>✊🏿 Afro-Brazilian Consciousness Day</h4>
+                <p>Celebration of African heritage, music, and identity in Brazil.</p>
+            </div>
+        </div>
+
+        <h2 class="text-center" style="margin-top: 40px; margin-bottom: 40px; font-size: 3rem;">🗓️ Monthly Festival Calendar</h2>
+
+        <section class="month-section" id="month-february">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-february">
+                February <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-february">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Rio Carnival</h4>
+                        <p>World’s largest carnival with samba parades and massive street parties.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">June</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Parintins Folklore Festival</h4>
-                    <p>Amazonian cultural battle between the red and blue folk teams.</p>
+        <section class="month-section" id="month-june">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-june">
+                June <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-june">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Parintins Folklore Festival</h4>
+                        <p>Amazonian cultural battle between the red and blue folk teams.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">October</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Oktoberfest Blumenau</h4>
-                    <p>German-style beer festival in a Brazilian town built by German settlers.</p>
+        <section class="month-section" id="month-october">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-october">
+                October <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-october">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Oktoberfest Blumenau</h4>
+                        <p>German-style beer festival in a Brazilian town built by German settlers.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">November</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Day of Afro-Brazilian Consciousness</h4>
-                    <p>Celebration of African heritage, music, and identity in Brazil.</p>
+        <section class="month-section" id="month-november">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-november">
+                November <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-november">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Day of Afro-Brazilian Consciousness</h4>
+                        <p>Celebration of African heritage, music, and identity in Brazil.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -69,5 +107,40 @@
             <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.month-toggle');
+            
+            toggles.forEach(toggle => {
+                const contentId = toggle.getAttribute('aria-controls');
+                const content = document.getElementById(contentId);
+                
+                // Initialize content state (ensure it's hidden on load)
+                toggle.setAttribute('aria-expanded', 'false');
+                content.classList.remove('open');
+                
+                toggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                    // Close all other open sections
+                    toggles.forEach(otherToggle => {
+                        if (otherToggle !== this) {
+                            otherToggle.setAttribute('aria-expanded', 'false');
+                            document.getElementById(otherToggle.getAttribute('aria-controls')).classList.remove('open');
+                        }
+                    });
+
+                    // Toggle current section
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    if (!isExpanded) {
+                        content.classList.add('open');
+                    } else {
+                        content.classList.remove('open');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

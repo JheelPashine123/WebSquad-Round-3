@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Northern Territory Festivals - CultureConnect</title>
+    <title>Western Australia Festivals - CultureConnect</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
 
     <section class="continent-hero australia-hero">
-        <h1>Unique Festivals of the Northern Territory 🇦🇺</h1>
-        <p style="color: rgba(255, 255, 255, 0.8);">Celebrating Indigenous culture and tropical arts.</p>
+        <h1>Vibrant Festivals of Western Australia 🇦🇺</h1>
+        <p style="color: rgba(255, 255, 255, 0.8);">Celebrating arts, coastal beauty, and unique pearling heritage.</p>
         <a href="australia.html" class="btn btn-secondary" style="margin-top: 20px; color: white; border-color: white;">← Back to Australia Map</a>
     </section>
 
@@ -20,68 +20,64 @@
 
         <div class="featured-cards-container">
             <div class="featured-card">
-                <h4>✨ Parrtjima – A Festival in Light</h4>
-                <p>An immersive light installation event showcasing Indigenous art in the stunning desert landscape of Alice Springs.</p>
+                <h4>🎶 Perth Festival</h4>
+                <p>Australia’s longest-running arts festival showcasing music, film, theatre, and culture.</p>
             </div>
             <div class="featured-card">
-                <h4>🌴 Darwin Festival</h4>
-                <p>A mid-year celebration of music, comedy, and cabaret held under tropical skies in Darwin.</p>
+                <h4>🎨 Sculpture by the Sea</h4>
+                <p>Huge outdoor art exhibition displayed along Cottesloe Beach.</p>
             </div>
             <div class="featured-card">
-                <h4>🌅 Mindil Beach Markets</h4>
-                <p>Famous weekly food and culture market known for spectacular sunset views over the ocean.</p>
-            </div>
-            <div class="featured-card">
-                <h4>🎨 Desert Art Fairs</h4>
-                <p>Events showcasing unique contemporary and traditional Central Australian Indigenous artworks.</p>
+                <h4>🦪 Shinju Matsuri (Broome)</h4>
+                <p>Japanese–Indigenous–Pearling heritage festival.</p>
             </div>
         </div>
 
-        <h2 class="text-center" style="margin-top: 40px; margin-bottom: 40px; font-size: 3rem;">🗓 Monthly Festival Calendar</h2>
+        <h2 class="text-center" style="margin-top: 40px; margin-bottom: 40px; font-size: 3rem;">🗓️ Monthly Festival Calendar</h2>
 
-        <section class="month-section" id="month-april">
-            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-april">
-                April <span class="toggle-icon">▼</span>
+        <section class="month-section" id="month-february-march">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-february-march">
+                February–March <span class="toggle-icon">▼</span>
             </h3>
-            <div class="month-section-content" id="content-april">
+            <div class="month-section-content" id="content-february-march">
                 <div class="festival-grid-month">
                     <div class="festival-card-month">
-                        <h4>Parrtjima – A Festival in Light</h4>
-                        <p>Indigenous art + light installations in Alice Springs.</p>
+                        <h4>Perth Festival</h4>
+                        <p>Australia’s longest-running arts festival showcasing music, film, theatre, and culture.</p>
                     </div>
                     <div class="festival-card-month">
-                        <h4>Mindil Beach Sunset Markets (Starts Apr)</h4>
-                        <p>Food + culture market famous for sunsets (weekly April–October).</p>
+                        <h4>Sculpture by the Sea (Cottesloe)</h4>
+                        <p>Huge outdoor art exhibition along the beach.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section" id="month-august">
-            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-august">
-                August <span class="toggle-icon">▼</span>
+        <section class="month-section" id="month-august-september">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-august-september">
+                August–September <span class="toggle-icon">▼</span>
             </h3>
-            <div class="month-section-content" id="content-august">
+            <div class="month-section-content" id="content-august-september">
                 <div class="festival-grid-month">
                     <div class="festival-card-month">
-                        <h4>Darwin Festival</h4>
-                        <p>Music, comedy, and cabaret under tropical skies.</p>
+                        <h4>Shinju Matsuri (Broome)</h4>
+                        <p>Japanese–Indigenous–Pearling heritage festival.</p>
                     </div>
                 </div>
             </div>
         </section>
-        
-        </div>
+
+    </div>
 
     <footer class="footer">
         <div class="container text-center">
-            <p id="footer-text">Made with ❤ by CultureConnect Team</p>
+            <p id="footer-text">Made with ❤️ by CultureConnect Team</p>
             <div class="social-links">
                 <a href="#" target="_blank" rel="noopener noreferrer">📘</a> 
                 <a href="#" target="_blank" rel="noopener noreferrer">🐦</a> 
                 <a href="#" target="_blank" rel="noopener noreferrer">📷</a>
             </div>
-            <p class="copyright">©️ 2024 CultureConnect. All rights reserved.</p>
+            <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
     
@@ -90,8 +86,17 @@
             const toggles = document.querySelectorAll('.month-toggle');
             
             toggles.forEach(toggle => {
-                const contentId = toggle.getAttribute('aria-controls');
-                const content = document.getElementById(contentId);
+                // Ensure IDs and attributes are correctly set
+                const section = toggle.closest('.month-section');
+                
+                // Use a simplified ID based on the section's ID (e.g., month-february-march -> content-february-march)
+                const contentId = 'content-' + section.id.split('-').slice(1).join('-');
+                const content = section.querySelector('div.month-section-content');
+
+                if (content) {
+                    content.id = contentId;
+                    toggle.setAttribute('aria-controls', contentId);
+                }
                 
                 // Initialize content state (ensure it's hidden on load)
                 toggle.setAttribute('aria-expanded', 'false');
@@ -104,7 +109,8 @@
                     toggles.forEach(otherToggle => {
                         if (otherToggle !== this) {
                             otherToggle.setAttribute('aria-expanded', 'false');
-                            document.getElementById(otherToggle.getAttribute('aria-controls')).classList.remove('open');
+                            const otherContent = document.getElementById(otherToggle.getAttribute('aria-controls'));
+                            if (otherContent) otherContent.classList.remove('open');
                         }
                     });
 

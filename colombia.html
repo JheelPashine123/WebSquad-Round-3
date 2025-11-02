@@ -15,38 +15,69 @@
     </section>
 
     <div class="container">
-        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">A Calendar of Celebration</h2>
+        
+        <h2 class="text-center" style="margin-top: 60px; margin-bottom: 40px; font-size: 3rem;">🌟 Featured National Celebrations</h2>
 
-        <section class="month-section">
-            <h3 class="month-title">January</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Carnaval de Blancos y Negros</h4>
-                    <p>Parade celebrating diversity with body paint + music.</p>
+        <div class="featured-cards-container">
+            <div class="featured-card">
+                <h4>🎨 Carnaval de Blancos y Negros</h4>
+                <p>A parade celebrating diversity with body paint and music.</p>
+            </div>
+            <div class="featured-card">
+                <h4>🌸 Feria de las Flores</h4>
+                <p>The Flower Parade of Medellín, featuring giant flower displays carried on backs (silletas).</p>
+            </div>
+            <div class="featured-card">
+                <h4>🕯️ Festival of Lights</h4>
+                <p>A beautiful tradition where streets glow with lanterns and candles, welcoming the Christmas season.</p>
+            </div>
+        </div>
+
+        <h2 class="text-center" style="margin-top: 40px; margin-bottom: 40px; font-size: 3rem;">🗓️ Monthly Festival Calendar</h2>
+
+        <section class="month-section" id="month-january">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-january">
+                January <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-january">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Carnaval de Blancos y Negros</h4>
+                        <p>Parade celebrating diversity with body paint + music.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">August</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Feria de las Flores (Medellín)</h4>
-                    <p>Flower parade with giant silletas (flower displays) carried on backs.</p>
+        <section class="month-section" id="month-august">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-august">
+                August <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-august">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Feria de las Flores (Medellín)</h4>
+                        <p>Flower parade with giant silletas (flower displays) carried on backs.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="month-section">
-            <h3 class="month-title">December</h3>
-            <div class="festival-grid-month">
-                <div class="festival-card-month">
-                    <h4>Festival of Lights (Día de las Velitas)</h4>
-                    <p>Streets glow with lanterns and candles welcoming Christmas.</p>
+        <section class="month-section" id="month-december">
+            <h3 class="month-toggle" aria-expanded="false" aria-controls="content-december">
+                December <span class="toggle-icon">▼</span>
+            </h3>
+            <div class="month-section-content" id="content-december">
+                <div class="festival-grid-month">
+                    <div class="festival-card-month">
+                        <h4>Festival of Lights (Día de las Velitas)</h4>
+                        <p>Streets glow with lanterns and candles welcoming Christmas.</p>
+                    </div>
                 </div>
             </div>
         </section>
-    </div>
+        
+        </div>
 
     <footer class="footer">
         <div class="container text-center">
@@ -59,5 +90,50 @@
             <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.month-toggle');
+            
+            toggles.forEach(toggle => {
+                const contentId = toggle.getAttribute('aria-controls');
+                const content = document.getElementById(contentId);
+                
+                // Assign unique IDs to the sections and content divs
+                const section = toggle.closest('.month-section');
+                const monthName = section.querySelector('.month-title').textContent.toLowerCase().replace(/\s/g, '');
+                
+                const currentContentId = 'content-' + monthName.split('-')[0];
+                const currentContent = section.querySelector('.month-section-content');
+
+                currentContent.id = currentContentId;
+                toggle.setAttribute('aria-controls', currentContentId);
+
+                // Initialize content state (ensure it's hidden on load)
+                toggle.setAttribute('aria-expanded', 'false');
+                currentContent.classList.remove('open');
+                
+                toggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                    // Close all other open sections
+                    toggles.forEach(otherToggle => {
+                        if (otherToggle !== this) {
+                            otherToggle.setAttribute('aria-expanded', 'false');
+                            document.getElementById(otherToggle.getAttribute('aria-controls')).classList.remove('open');
+                        }
+                    });
+
+                    // Toggle current section
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    if (!isExpanded) {
+                        currentContent.classList.add('open');
+                    } else {
+                        currentContent.classList.remove('open');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
