@@ -211,3 +211,58 @@ h1, h2, h3 {
     font-weight: 600;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+/* --- India Monthly Festival Styles --- */
+.month-section {
+    padding: 20px 0;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--color-secondary);
+}
+
+.month-section:last-child {
+    border-bottom: none;
+}
+
+.month-title {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    color: var(--color-primary-dark);
+    margin-bottom: 20px;
+    text-align: left;
+    border-left: 5px solid var(--color-primary);
+    padding-left: 15px;
+}
+
+.festival-grid-month {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.festival-card-month {
+    background-color: var(--color-surface);
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.festival-card-month:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.festival-card-month h4 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.festival-card-month p {
+    font-size: 0.95rem;
+    color: var(--color-light-text);
+    line-height: 1.5;
+}

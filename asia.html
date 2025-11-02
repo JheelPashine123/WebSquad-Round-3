@@ -5,67 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asia Festivals - CultureConnect</title>
     <link rel="stylesheet" href="style.css"> 
-    <style>
-        /* Asia Page Specific Styles */
-        .asia-hero {
-            background: linear-gradient(135deg, #a87f32 0%, #d4c4a8 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        .asia-hero h1 {
-            color: white;
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-        .asia-map-container {
-            max-width: 800px;
-            margin: 40px auto;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        .asia-map-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .festival-list {
-            padding: 40px 0;
-            text-align: center;
-        }
-        .festival-list ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .festival-list li {
-            background-color: var(--color-secondary);
-            padding: 15px 25px;
-            border-radius: 8px;
-            width: 250px;
-            font-family: var(--font-serif);
-            font-weight: 600;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    </style>
 </head>
 <body>
 
-    <section class="asia-hero">
+    <section class="continent-hero asia-hero">
         <h1>Festivals of Asia</h1>
         <p style="color: rgba(255, 255, 255, 0.8);">Discover the rich tapestry of celebrations across the world's largest continent.</p>
         <a href="index.html" class="btn btn-secondary" style="margin-top: 20px; color: white; border-color: white;">← Back to World Map</a>
     </section>
 
     <div class="container">
-        <section class="asia-map-section">
+        <section class="continent-map-section">
             <h2 class="text-center" style="margin-top: 60px;">Geographical View</h2>
-            <div class="asia-map-container">
-                <img src="https://img.freepik.com/premium-vector/asia-map-vector_850451-86.jpg" alt="Map of Asia">
+            <div class="continent-map-container">
+                
+                <img src="https://img.freepik.com/premium-vector/asia-map-vector_850451-86.jpg" 
+                     alt="Map of Asia" 
+                     usemap="#asiamap" 
+                     id="asia-map-image">
+                
+                <map name="asiamap" id="asiamap">
+                    <area shape="poly" 
+                          coords="490,470,600,480,680,510,720,580,720,680,660,780,580,780,500,750,470,650,490,550" 
+                          alt="India" 
+                          data-country="India" 
+                          data-page="india.html" 
+                          data-festivals="Holi, Diwali, etc." 
+                          href="javascript:void(0);" 
+                          id="india-area" />
+                          
+                    <area shape="poly" 
+                          coords="580,300,850,300,850,500,600,600,500,550" 
+                          alt="China" 
+                          data-country="China" 
+                          data-page="china.html" 
+                          data-festivals="Spring Festival, Lantern Festival, etc." 
+                          href="javascript:void(0);" 
+                          id="china-area" />
+
+                    <area shape="poly" 
+                          coords="400,100,850,100,850,300,580,300,500,250,400,200" 
+                          alt="Russia" 
+                          data-country="Russia" 
+                          data-page="russia.html" 
+                          data-festivals="Orthodox Christmas, Maslenitsa, etc." 
+                          href="javascript:void(0);" 
+                          id="russia-area" />
+                    
+                    </map>
+                
+                <div id="country-tooltip" class="tooltip"></div>
             </div>
         </section>
 
@@ -93,5 +82,59 @@
             <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const countryAreas = document.querySelectorAll('#asiamap area');
+        const countryTooltip = document.getElementById('country-tooltip');
+        const countryMapImage = document.getElementById('asia-map-image');
+        
+        const ASIA_MAP_NATURAL_WIDTH = 1000; 
+
+        countryAreas.forEach(area => {
+            area.addEventListener('mouseover', (e) => {
+                const countryName = area.getAttribute('data-country');
+                
+                // Hover text update
+                countryTooltip.textContent = `Click to Explore ${countryName}'s Festivals`;
+                countryTooltip.style.opacity = '1';
+                
+                // --- Tooltip Positioning Logic ---
+                const coords = area.coords.split(',').map(c => parseInt(c.trim()));
+                let x, y;
+
+                if (area.shape === 'poly') {
+                    let sumX = 0, sumY = 0;
+                    for (let i = 0; i < coords.length; i += 2) {
+                        sumX += coords[i];
+                        sumY += coords[i + 1];
+                    }
+                    x = sumX / (coords.length / 2);
+                    y = sumY / (coords.length / 2);
+                } else {
+                    x = coords[0]; y = coords[1];
+                }
+                
+                const scale = countryMapImage.offsetWidth / ASIA_MAP_NATURAL_WIDTH;
+                const tooltipX = (x * scale);
+                const tooltipY = (y * scale);
+                
+                countryTooltip.style.left = tooltipX + 'px';
+                countryTooltip.style.top = tooltipY + 'px';
+            });
+
+            area.addEventListener('mouseout', () => {
+                countryTooltip.style.opacity = '0';
+            });
+
+            area.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                const page = area.getAttribute('data-page');
+
+                if (page) {
+                    window.location.href = page; // Redirect to country page (e.g., india.html)
+                }
+            });
+        });
+    </script>
 </body>
 </html>
