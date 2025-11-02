@@ -9,8 +9,8 @@
 <body>
 
     <section class="continent-hero north-america-hero">
-        <h1>Celebrations of North America</h1>
-        <p style="color: rgba(255, 255, 255, 0.8);">From ancient indigenous events to modern global gatherings, explore North American culture.</p>
+        <h1>Celebrations of North America 🇺🇸🇨🇦🇲🇽</h1>
+        <p style="color: rgba(255, 255, 255, 0.8);">From indigenous events to massive summer gatherings, explore North American culture.</p>
         <a href="index.html" class="btn btn-secondary" style="margin-top: 20px; color: white; border-color: white;">← Back to World Map</a>
     </section>
 
@@ -18,7 +18,39 @@
         <section class="continent-map-section">
             <h2 class="text-center" style="margin-top: 60px;">Geographical View</h2>
             <div class="continent-map-container">
-                <img src="https://www.shutterstock.com/image-vector/north-america-countries-political-map-600nw-2440358373.jpg" alt="Map of North America">
+                <img src="https://www.shutterstock.com/image-vector/north-america-countries-political-map-600nw-2440358373.jpg" 
+                     alt="Map of North America" 
+                     usemap="#namap" 
+                     id="na-map-image">
+                
+                <map name="namap" id="namap">
+                    <area shape="poly" 
+                          coords="150,200, 500,200, 500,450, 450,450, 400,600, 100,600, 150,400" 
+                          alt="United States" 
+                          data-country="United States" 
+                          data-page="usa.html" 
+                          data-festivals="Mardi Gras, Coachella" 
+                          href="javascript:void(0);" />
+                          
+                    <area shape="poly" 
+                          coords="100,20, 550,20, 550,200, 150,200" 
+                          alt="Canada" 
+                          data-country="Canada" 
+                          data-page="canada.html" 
+                          data-festivals="Canada Day, Calgary Stampede" 
+                          href="javascript:void(0);" />
+
+                    <area shape="poly" 
+                          coords="100,600, 400,600, 450,750, 200,750, 100,700" 
+                          alt="Mexico" 
+                          data-country="Mexico" 
+                          data-page="mexico.html" 
+                          data-festivals="Día de Muertos, Guelaguetza" 
+                          href="javascript:void(0);" />
+                    
+                    </map>
+                
+                <div id="country-tooltip" class="tooltip"></div>
             </div>
         </section>
 
@@ -27,10 +59,7 @@
             <ul>
                 <li>🎺 Mardi Gras (USA)</li>
                 <li>🍁 Calgary Stampede (Canada)</li>
-                <li>💀 Day of the Dead / Día de Muertos (Mexico)</li>
-                <li>🎶 Jazz & Heritage Festival (USA)</li>
-                <li>🔥 Burning Man (USA)</li>
-                <li>🏮 Toronto Caribbean Carnival (Canada)</li>
+                <li>💀 Day of the Dead (Mexico)</li>
             </ul>
         </section>
     </div>
@@ -46,5 +75,62 @@
             <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const countryAreas = document.querySelectorAll('#namap area');
+        const countryTooltip = document.getElementById('country-tooltip');
+        const countryMapImage = document.getElementById('na-map-image');
+        
+        // This is a reference width for coordinate scaling (using 600px based on image source name)
+        const NA_MAP_NATURAL_WIDTH = 600; 
+
+        countryAreas.forEach(area => {
+            area.addEventListener('mouseover', (e) => {
+                const countryName = area.getAttribute('data-country');
+                
+                countryTooltip.textContent = `Click to Explore ${countryName}'s Festivals`;
+                countryTooltip.style.opacity = '1';
+                
+                // --- Tooltip Positioning Logic ---
+                const coords = area.coords.split(',').map(c => parseInt(c.trim()));
+                let x, y;
+
+                if (area.shape === 'poly') {
+                    let sumX = 0, sumY = 0;
+                    for (let i = 0; i < coords.length; i += 2) {
+                        sumX += coords[i];
+                        sumY += coords[i + 1];
+                    }
+                    x = sumX / (coords.length / 2);
+                    y = sumY / (coords.length / 2);
+                } else if (area.shape === 'rect') {
+                    x = (coords[0] + coords[2]) / 2;
+                    y = (coords[1] + coords[3]) / 2;
+                } else {
+                    x = coords[0]; y = coords[1];
+                }
+                
+                const scale = countryMapImage.offsetWidth / NA_MAP_NATURAL_WIDTH;
+                const tooltipX = (x * scale);
+                const tooltipY = (y * scale);
+                
+                countryTooltip.style.left = tooltipX + 'px';
+                countryTooltip.style.top = tooltipY + 'px';
+            });
+
+            area.addEventListener('mouseout', () => {
+                countryTooltip.style.opacity = '0';
+            });
+
+            area.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                const page = area.getAttribute('data-page');
+
+                if (page) {
+                    window.location.href = page;
+                }
+            });
+        });
+    </script>
 </body>
 </html>

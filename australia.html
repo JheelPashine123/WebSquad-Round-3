@@ -9,28 +9,74 @@
 <body>
 
     <section class="continent-hero australia-hero">
-        <h1>Unique Festivals of Australia & Oceania</h1>
+        <h1>Unique Festivals of Australia & Oceania 🇦🇺</h1>
         <p style="color: rgba(255, 255, 255, 0.8);">Discover the diverse arts, food, and coastal celebrations of Australia and the Pacific.</p>
         <a href="index.html" class="btn btn-secondary" style="margin-top: 20px; color: white; border-color: white;">← Back to World Map</a>
     </section>
 
     <div class="container">
         <section class="continent-map-section">
-            <h2 class="text-center" style="margin-top: 60px;">Geographical View</h2>
+            <h2 class="text-center" style="margin-top: 60px;">Geographical View (States & Territories)</h2>
             <div class="continent-map-container">
-                <img src="https://thumbs.dreamstime.com/b/australia-map-regions-vector-illustration-australian-state-territory-australia-map-regions-vector-australian-states-284944769.jpg" alt="Map of Australia">
+                <img src="https://thumbs.dreamstime.com/b/australia-map-regions-vector-illustration-australian-state-territory-australia-map-regions-vector-australian-states-284944769.jpg" 
+                     alt="Map of Australia Regions" 
+                     usemap="#australiamap" 
+                     id="australia-map-image">
+                
+                <map name="australiamap" id="australiamap">
+                    <area shape="poly" 
+                          coords="50,150, 450,150, 450,800, 50,800" 
+                          alt="Western Australia" 
+                          data-country="Western Australia (WA)" 
+                          data-page="western_australia.html" 
+                          data-festivals="Perth Festival, Sculpture by the Sea" 
+                          href="javascript:void(0);" />
+                          
+                    <area shape="poly" 
+                          coords="450,150, 650,150, 650,550, 450,550" 
+                          alt="Northern Territory" 
+                          data-country="Northern Territory (NT)" 
+                          data-page="northern_territory.html" 
+                          data-festivals="Parrtjima, Darwin Festival" 
+                          href="javascript:void(0);" />
+
+                    <area shape="poly" 
+                          coords="650,150, 950,150, 950,600, 650,600" 
+                          alt="Queensland" 
+                          data-country="Queensland (QLD)" 
+                          data-page="queensland.html" 
+                          data-festivals="Brisbane Festival, Woodford Folk Festival" 
+                          href="javascript:void(0);" />
+                          
+                    <area shape="poly" 
+                          coords="650,600, 900,600, 900,850, 650,850" 
+                          alt="New South Wales" 
+                          data-country="New South Wales (NSW & ACT)" 
+                          data-page="new_south_wales.html" 
+                          data-festivals="Vivid Sydney, Sydney Mardi Gras" 
+                          href="javascript:void(0);" />
+                          
+                    <area shape="poly" 
+                          coords="450,550, 650,550, 650,850, 450,850" 
+                          alt="Other States" 
+                          data-country="Other States (SA, VIC, TAS)" 
+                          data-page="#" 
+                          data-festivals="Adelaide Fringe, Melbourne Int. Arts Festival" 
+                          href="javascript:void(0);" />
+                          
+                </map>
+                
+                <div id="country-tooltip" class="tooltip"></div>
             </div>
         </section>
 
         <section class="festival-list">
             <h2 style="margin-bottom: 30px;">Featured Australian Celebrations</h2>
             <ul>
-                <li>🎆 Sydney New Year's Eve (Australia)</li>
-                <li>🎶 Splendour in the Grass (Australia)</li>
-                <li>🌈 Mardi Gras (Sydney)</li>
-                <li>🌴 Pasifika Festival (New Zealand)</li>
-                <li>🍷 Taste of Tasmania (Australia)</li>
-                <li>⛵ Fremantle Festival (Australia)</li>
+                <li>🎆 Sydney New Year's Eve (NSW)</li>
+                <li>🎶 Splendour in the Grass (NSW)</li>
+                <li>🌈 Mardi Gras (NSW)</li>
+                <li>🌴 Pasifika Festival (New Zealand - Oceania)</li>
             </ul>
         </section>
     </div>
@@ -46,5 +92,67 @@
             <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const countryAreas = document.querySelectorAll('#australiamap area');
+        const countryTooltip = document.getElementById('country-tooltip');
+        const countryMapImage = document.getElementById('australia-map-image');
+        
+        // This is a reference width for coordinate scaling (using 1000px based on image source)
+        const AUSTRALIA_MAP_NATURAL_WIDTH = 1000; 
+
+        countryAreas.forEach(area => {
+            area.addEventListener('mouseover', (e) => {
+                const countryName = area.getAttribute('data-country');
+                const page = area.getAttribute('data-page');
+
+                let hoverText = (page && page !== '#') 
+                    ? `Click to Explore ${countryName}'s Festivals`
+                    : `${countryName} (No detailed page)`;
+                
+                countryTooltip.textContent = hoverText;
+                countryTooltip.style.opacity = '1';
+                
+                // --- Tooltip Positioning Logic ---
+                const coords = area.coords.split(',').map(c => parseInt(c.trim()));
+                let x, y;
+
+                if (area.shape === 'poly') {
+                    let sumX = 0, sumY = 0;
+                    for (let i = 0; i < coords.length; i += 2) {
+                        sumX += coords[i];
+                        sumY += coords[i + 1];
+                    }
+                    x = sumX / (coords.length / 2);
+                    y = sumY / (coords.length / 2);
+                } else if (area.shape === 'rect') {
+                    x = (coords[0] + coords[2]) / 2;
+                    y = (coords[1] + coords[3]) / 2;
+                } else {
+                    x = coords[0]; y = coords[1];
+                }
+                
+                const scale = countryMapImage.offsetWidth / AUSTRALIA_MAP_NATURAL_WIDTH;
+                const tooltipX = (x * scale);
+                const tooltipY = (y * scale);
+                
+                countryTooltip.style.left = tooltipX + 'px';
+                countryTooltip.style.top = tooltipY + 'px';
+            });
+
+            area.addEventListener('mouseout', () => {
+                countryTooltip.style.opacity = '0';
+            });
+
+            area.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                const page = area.getAttribute('data-page');
+
+                if (page && page !== '#') {
+                    window.location.href = page;
+                }
+            });
+        });
+    </script>
 </body>
 </html>

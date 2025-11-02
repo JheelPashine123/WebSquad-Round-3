@@ -18,12 +18,44 @@
         <section class="continent-map-section">
             <h2 class="text-center" style="margin-top: 60px;">Geographical View</h2>
             <div class="continent-map-container">
-                <img src="https://www.researchgate.net/profile/David-Mihigo/publication/371530239/figure/fig1/AS:11431281167478929@1686665831782/Map-of-Africa-and-its-countries-18_Q320.jpg" alt="Map of Africa">
+                <img src="https://www.researchgate.net/profile/David-Mihigo/publication/371530239/figure/fig1/AS:11431281167478929@1686665831782/Map-of-Africa-and-its-countries-18_Q320.jpg" 
+                     alt="Map of Africa" 
+                     usemap="#africamap" 
+                     id="africa-map-image">
+                
+                <map name="africamap" id="africamap">
+                    <area shape="poly" 
+                          coords="350,150, 480,180, 450,280, 360,300, 350,250" 
+                          alt="Egypt" 
+                          data-country="Egypt" 
+                          data-page="egypt.html" 
+                          data-festivals="Abu Simbel, Mawlid un-Nabi" 
+                          href="javascript:void(0);" />
+                          
+                    <area shape="poly" 
+                          coords="150,450, 300,400, 350,550, 200,600" 
+                          alt="Nigeria" 
+                          data-country="Nigeria" 
+                          data-page="nigeria.html" 
+                          data-festivals="Calabar Carnival, Durbar Festival" 
+                          href="javascript:void(0);" />
+
+                    <area shape="rect" 
+                          coords="350,750, 500,850" 
+                          alt="South Africa" 
+                          data-country="South Africa" 
+                          data-page="south_africa.html" 
+                          data-festivals="Cape Town Minstrel Carnival, Jazz Festival" 
+                          href="javascript:void(0);" />
+                    
+                    </map>
+                
+                <div id="country-tooltip" class="tooltip"></div>
             </div>
         </section>
 
         <section class="festival-list">
-            <h2 style="margin-bottom: 30px;">Featured African Celebrations</h2>
+            <h2 style="margin-bottom: 30px;">Featured African Festivals</h2>
             <ul>
                 <li>🎭 Fête de Masques (Burkina Faso)</li>
                 <li>🎶 Gnaoua World Music Festival (Morocco)</li>
@@ -46,5 +78,62 @@
             <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const countryAreas = document.querySelectorAll('#africamap area');
+        const countryTooltip = document.getElementById('country-tooltip');
+        const countryMapImage = document.getElementById('africa-map-image');
+        
+        // This is a reference width for coordinate scaling (used for coordinate estimation)
+        const AFRICA_MAP_NATURAL_WIDTH = 800; 
+
+        countryAreas.forEach(area => {
+            area.addEventListener('mouseover', (e) => {
+                const countryName = area.getAttribute('data-country');
+                
+                countryTooltip.textContent = `Click to Explore ${countryName}'s Festivals`;
+                countryTooltip.style.opacity = '1';
+                
+                // --- Tooltip Positioning Logic ---
+                const coords = area.coords.split(',').map(c => parseInt(c.trim()));
+                let x, y;
+
+                if (area.shape === 'poly') {
+                    let sumX = 0, sumY = 0;
+                    for (let i = 0; i < coords.length; i += 2) {
+                        sumX += coords[i];
+                        sumY += coords[i + 1];
+                    }
+                    x = sumX / (coords.length / 2);
+                    y = sumY / (coords.length / 2);
+                } else if (area.shape === 'rect') {
+                    x = (coords[0] + coords[2]) / 2;
+                    y = (coords[1] + coords[3]) / 2;
+                } else {
+                    x = coords[0]; y = coords[1];
+                }
+                
+                const scale = countryMapImage.offsetWidth / AFRICA_MAP_NATURAL_WIDTH;
+                const tooltipX = (x * scale);
+                const tooltipY = (y * scale);
+                
+                countryTooltip.style.left = tooltipX + 'px';
+                countryTooltip.style.top = tooltipY + 'px';
+            });
+
+            area.addEventListener('mouseout', () => {
+                countryTooltip.style.opacity = '0';
+            });
+
+            area.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                const page = area.getAttribute('data-page');
+
+                if (page) {
+                    window.location.href = page;
+                }
+            });
+        });
+    </script>
 </body>
 </html>

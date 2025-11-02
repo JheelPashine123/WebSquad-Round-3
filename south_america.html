@@ -9,7 +9,7 @@
 <body>
 
     <section class="continent-hero south-america-hero">
-        <h1>Rhythmic Festivals of South America</h1>
+        <h1>Rhythmic Festivals of South America 🇧🇷🇦🇷🇵🇪</h1>
         <p style="color: rgba(255, 255, 255, 0.8);">Immerse yourself in the passion and dance of South American traditions.</p>
         <a href="index.html" class="btn btn-secondary" style="margin-top: 20px; color: white; border-color: white;">← Back to World Map</a>
     </section>
@@ -18,19 +18,72 @@
         <section class="continent-map-section">
             <h2 class="text-center" style="margin-top: 60px;">Geographical View</h2>
             <div class="continent-map-container">
-                <img src="https://media.istockphoto.com/id/1150993061/vector/south-america-map.jpg?s=612x612&w=0&k=20&c=GwEy744eC5FSoCr4KqezZhO5Bsr4KRCxM_3cZhRgQg0=" alt="Map of South America">
+                <img src="https://media.istockphoto.com/id/1150993061/vector/south-america-map.jpg?s=612x612&w=0&k=20&c=GwEy744eC5FSoCr4KqezZhO5Bsr4KRCxM_3cZhRgQg0=" 
+                     alt="Map of South America" 
+                     usemap="#samap" 
+                     id="sa-map-image">
+                
+                <map name="samap" id="samap">
+                    <area shape="poly" 
+                          coords="300,50, 600,100, 650,450, 500,550, 400,500, 300,300" 
+                          alt="Brazil" 
+                          data-country="Brazil" 
+                          data-page="brazil.html" 
+                          data-festivals="Rio Carnival, Parintins" 
+                          href="javascript:void(0);" />
+                          
+                    <area shape="poly" 
+                          coords="250,550, 400,550, 380,750, 200,800, 150,700" 
+                          alt="Argentina" 
+                          data-country="Argentina" 
+                          data-page="argentina.html" 
+                          data-festivals="Fiesta de la Vendimia, Tango Festival" 
+                          href="javascript:void(0);" />
+
+                    <area shape="poly" 
+                          coords="150,300, 250,300, 300,500, 250,550, 100,500" 
+                          alt="Peru" 
+                          data-country="Peru" 
+                          data-page="peru.html" 
+                          data-festivals="Inti Raymi, Señor de los Milagros" 
+                          href="javascript:void(0);" />
+                          
+                    <area shape="poly" 
+                          coords="100,500, 150,700, 200,800, 100,850, 50,700" 
+                          alt="Chile" 
+                          data-country="Chile" 
+                          data-page="chile.html" 
+                          data-festivals="Fiestas Patrias, Viña del Mar Music Festival" 
+                          href="javascript:void(0);" />
+                          
+                    <area shape="poly" 
+                          coords="150,150, 350,150, 300,300, 150,300" 
+                          alt="Colombia" 
+                          data-country="Colombia" 
+                          data-page="colombia.html" 
+                          data-festivals="Carnaval de Blancos y Negros, Feria de las Flores" 
+                          href="javascript:void(0);" />
+                          
+                    <area shape="rect" 
+                          coords="100,300, 200,400" 
+                          alt="Ecuador" 
+                          data-country="Ecuador" 
+                          data-page="ecuador.html" 
+                          data-festivals="Inti Raymi, Quito Foundation Festival" 
+                          href="javascript:void(0);" />
+                          
+                </map>
+                
+                <div id="country-tooltip" class="tooltip"></div>
             </div>
         </section>
 
         <section class="festival-list">
             <h2 style="margin-bottom: 30px;">Featured South American Celebrations</h2>
             <ul>
-                <li> Samba Rio Carnival (Brazil)</li>
+                <li>💃 Rio Carnival (Brazil)</li>
+                <li>🎵 Tango Festival (Argentina)</li>
                 <li>☀️ Inti Raymi (Peru)</li>
-                <li>🎭 Barranquilla Carnival (Colombia)</li>
-                <li>🍇 Vendimia Festival (Argentina)</li>
-                <li>🎵 Festival de Viña del Mar (Chile)</li>
-                <li>💃 Fiesta de la Candelaria (Peru)</li>
             </ul>
         </section>
     </div>
@@ -46,5 +99,62 @@
             <p class="copyright">© 2024 CultureConnect. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const countryAreas = document.querySelectorAll('#samap area');
+        const countryTooltip = document.getElementById('country-tooltip');
+        const countryMapImage = document.getElementById('sa-map-image');
+        
+        // This is a reference width for coordinate scaling (using 612px based on image source)
+        const SA_MAP_NATURAL_WIDTH = 612; 
+
+        countryAreas.forEach(area => {
+            area.addEventListener('mouseover', (e) => {
+                const countryName = area.getAttribute('data-country');
+                
+                countryTooltip.textContent = `Click to Explore ${countryName}'s Festivals`;
+                countryTooltip.style.opacity = '1';
+                
+                // --- Tooltip Positioning Logic ---
+                const coords = area.coords.split(',').map(c => parseInt(c.trim()));
+                let x, y;
+
+                if (area.shape === 'poly') {
+                    let sumX = 0, sumY = 0;
+                    for (let i = 0; i < coords.length; i += 2) {
+                        sumX += coords[i];
+                        sumY += coords[i + 1];
+                    }
+                    x = sumX / (coords.length / 2);
+                    y = sumY / (coords.length / 2);
+                } else if (area.shape === 'rect') {
+                    x = (coords[0] + coords[2]) / 2;
+                    y = (coords[1] + coords[3]) / 2;
+                } else {
+                    x = coords[0]; y = coords[1];
+                }
+                
+                const scale = countryMapImage.offsetWidth / SA_MAP_NATURAL_WIDTH;
+                const tooltipX = (x * scale);
+                const tooltipY = (y * scale);
+                
+                countryTooltip.style.left = tooltipX + 'px';
+                countryTooltip.style.top = tooltipY + 'px';
+            });
+
+            area.addEventListener('mouseout', () => {
+                countryTooltip.style.opacity = '0';
+            });
+
+            area.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                const page = area.getAttribute('data-page');
+
+                if (page) {
+                    window.location.href = page;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
